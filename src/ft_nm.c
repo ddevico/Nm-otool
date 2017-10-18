@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 13:15:23 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/18 13:37:23 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/18 16:07:43 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
     ft_putstr(ft_strjoin(ft_strjoin("nm: ", name), " No such file or directory.\n")); \
     return (-1)
 
-char				type_n_sect(unsigned int n_sect)
+char				type_n_sect(unsigned int n_sect, uint32_t type)
 {
     if (n_sect == 1)
         return ('T');
-    if (n_sect == 2)
-        return ('D');
-    if (n_sect == 3)
-        return ('B');
+    if (n_sect == 10)
+		return ('D');
+	if (n_sect == 3)
+		return ('B');
     return ('S');
 }
 
@@ -42,7 +42,7 @@ char				type_element(uint32_t type, uint32_t n_sect, int addr)
 	else if ((type & N_TYPE) == N_ABS)
 		car = 'A';
     else if ((type & N_TYPE) == N_SECT)
-        car = type_n_sect(n_sect);
+        car = type_n_sect(n_sect, type);
 	else if ((type & N_TYPE) == N_PBUD)
 		car = 'U';
 	else if ((type & N_TYPE) == N_INDR)
