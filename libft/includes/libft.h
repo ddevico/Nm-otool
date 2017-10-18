@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tktorza <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/03 12:07:38 by tktorza           #+#    #+#             */
-/*   Updated: 2017/10/03 12:07:42 by tktorza          ###   ########.fr       */
+/*   Created: 2017/10/03 12:07:38 by ddevico           #+#    #+#             */
+/*   Updated: 2017/10/18 14:03:01 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
+char				*ft_itohex(int n, int nb_z);
 void				*ft_memalloc(size_t size);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
