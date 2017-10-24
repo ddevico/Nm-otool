@@ -5,25 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/10/03 12:02:00 by ddevico           #+#    #+#              #
-#    Updated: 2017/10/18 14:09:32 by ddevico          ###   ########.fr        #
+#    Created: 2017/10/18 14:42:35 by ddevico           #+#    #+#              #
+#    Updated: 2017/10/24 13:56:47 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = nm
+NAME = ft_nm
 
 SRC_DIR	= ./src
 
-SRC = ft_nm.c sort.c
+SRC =	ft_nm.c \
+		sort.c \
+		display.c \
+		arch_64.c \
+		arch_32.c \
+		ar_nm.c
 
 VPATH	= $(SRC_DIR)
 
 O_DIR	= ./obj
 OBJ		= $(addprefix $(O_DIR)/,$(SRC:.c=.o))
-
-WFLAGS = #-W -Wall -Werror -Wextra -fPIC
+SRC_PATH= $(addprefix $(SRC_DIR)/, $(SRC))
 
 CC = gcc
+
+CFLAGS = -Wall -Werror -Wextra
 
 HEADERS = -I includes/
 
@@ -48,6 +54,13 @@ obj/%.o: %.c
 
 obj:
 	@mkdir -p obj/
+
+res:
+	@mkdir -p res/
+	@cat /usr/include/mach-o/loader.h > res/loader.h
+	@cat /usr/include/mach-o/nlist.h > res/nlist.h
+	@cat /usr/include/ar.h > res/ar.h
+	@cat /usr/include/mach-o/ranlib.h > res/ranlib.h
 
 clean:
 	@echo "\n"----------------------- NM CLEAN ---------------------------

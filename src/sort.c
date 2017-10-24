@@ -5,52 +5,91 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/18 13:15:23 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/18 13:37:35 by ddevico          ###   ########.fr       */
+/*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
+/*   Updated: 2017/10/24 11:06:51 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/nm_tool.h"
+#include "../inc/nm_otool.h"
 
-static struct nlist_64     *fill_array(struct nlist_64 *tab, int taille)
+struct nlist		*fill_array(struct nlist *tab, int nsyms, char *stringtable)
 {
-    struct nlist_64 *tab2;
-    int             i;
+	int				i;
+	struct nlist	*tab2;
 
-    tab2 = (struct nlist_64*)malloc(sizeof(struct nlist_64) * taille);
-    i = 0;
-    while (i < taille)
-    {
-        tab2[i] = tab[i];
-        i++;
-    }
-    return (tab2);
+	tab2 = (struct nlist*)malloc(sizeof(struct nlist) * nsyms);
+	i = -1;
+	while (++i < nsyms)
+		tab2[i] = tab[i];
+	return (tab2);
 }
 
-struct nlist_64     *tri_bulle(char *stringtable, struct nlist_64 *tab, int taille)
+struct nlist		*tri_bulle(char *stringtable, struct nlist *tab, int nsyms)
 {
-    struct nlist_64 *tab2;
-    struct nlist_64 temp;
-    int i;
-    int j;
+	int				i;
+	int				j;
+	struct nlist	*new_tab;
+	struct nlist	temp;
 
-    i = 0;
-    tab2 = fill_array(tab, taille);
-    while (i < taille)
-    {
-        j = 0;
-        while(j < taille)
-        {
-            if (ft_strcmp(stringtable + tab2[i].n_un.n_strx,
-                stringtable + tab2[j].n_un.n_strx) < 0)
-            {
-                temp = tab2[i];
-                tab2[i] = tab2[j];
-                tab2[j] = temp;
-            }
-            j++;
-        }
-        i++;
-    }
-    return (tab2);
+	i = 0;
+	new_tab = fill_array(tab, nsyms, stringtable);
+	while (i < nsyms)
+	{
+		j = 0;
+		while (j < nsyms)
+		{
+			if (ft_strcmp(stringtable + new_tab[i].n_un.n_strx,
+				stringtable + new_tab[j].n_un.n_strx) < 0)
+			{
+				temp = new_tab[i];
+				new_tab[i] = new_tab[j];
+				new_tab[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (new_tab);
+}
+
+struct nlist_64		*fill_array_64(struct nlist_64 *tab, int nsyms,
+	char *stringtable)
+{
+	int				i;
+	struct nlist_64	*tab2;
+
+	tab2 = (struct nlist_64*)malloc(sizeof(struct nlist_64) * nsyms);
+	i = -1;
+	while (++i < nsyms)
+		tab2[i] = tab[i];
+	return (tab2);
+}
+
+struct nlist_64		*tri_bulle_64(char *stringtable, struct nlist_64 *tab,
+	int nsyms)
+{
+	int				i;
+	int				j;
+	struct nlist_64	*new_tab;
+	struct nlist_64	temp;
+
+	i = 0;
+	new_tab = fill_array_64(tab, nsyms, stringtable);
+	while (i < nsyms)
+	{
+		j = 0;
+		while (j < nsyms)
+		{
+			if (ft_strcmp(stringtable + new_tab[i].n_un.n_strx,
+				stringtable + new_tab[j].n_un.n_strx) < 0)
+			{
+				temp = new_tab[i];
+				new_tab[i] = new_tab[j];
+				new_tab[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (new_tab);
 }
