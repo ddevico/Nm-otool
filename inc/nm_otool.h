@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:47:55 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 14:12:02 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 16:08:20 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/mman.h>
 # include <mach-o/loader.h>
 # include <mach-o/nlist.h>
-# include <mach-o/fat.h.h>
+# include <mach-o/fat.h>
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <stdlib.h>
@@ -84,7 +84,7 @@ struct nlist_64			*fill_array_64(struct nlist_64 *tab, int nsyms,
 	char *stringtable);
 struct nlist_64			*tri_bulle_64_alpha(char *stringtable,
 		struct nlist_64 *tab, int nsyms);
-void					order_off(t_offlist *lst);
+t_offlist				*order_off(t_offlist *lst);
 
 /*
 ** ARCH_64
@@ -126,7 +126,6 @@ int						search_lst(t_offlist *lst, uint32_t off);
 ** UTILS
 */
 
-void					fat_nm(char *ptr);
-
+void					handle_fat(char *ptr);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 13:35:53 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 17:12:26 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/nm_otool.h"
+#include "../../inc/nm_otool.h"
 
-void				order_off(t_offlist *lst)
+t_offlist			*order_off(t_offlist *lst)
 {
 	t_offlist	*cur;
 	uint32_t	tmp;
@@ -36,6 +36,7 @@ void				order_off(t_offlist *lst)
 			cur = cur->next;
 		}
 	}
+	return (lst);
 }
 
 struct nlist		*fill_array(struct nlist *tab, int nsyms, char *stringtable)

@@ -6,11 +6,11 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 13:21:09 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 13:22:16 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 17:12:22 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/nm_otool.h"
+#include "../../inc/nm_otool.h"
 
 char			type_n_sect(unsigned int n_sect, t_symtab *symt)
 {

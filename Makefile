@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/18 14:42:35 by ddevico           #+#    #+#              #
-#    Updated: 2017/10/25 14:12:20 by ddevico          ###   ########.fr        #
+#    Updated: 2017/10/25 17:41:38 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ SRC =	ft_nm.c \
 		display.c \
 		arch_64.c \
 		arch_32.c \
-		ar_nm.c	  \
+		arch_lib.c \
 		utils.c   \
-		fat_nm.c
+		arch_fat.c
 
 VPATH	= $(SRC_DIR)
 
@@ -33,7 +33,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -g
 
-HEADERS = -I includes/
+HEADERS = -I inc/
 
 I_LIBFT = -I libft/inc/
 

@@ -6,11 +6,11 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 14:08:10 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 17:12:24 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/nm_otool.h"
+#include "../../inc/nm_otool.h"
 
 t_symtab		init_symtab(t_symtab symt)
 {
@@ -38,7 +38,7 @@ void			nm(char *ptr, char *name)
 	if (magic_number == MH_MAGIC_64)
 		handle_64(ptr);
 	else if (magic_number == FAT_MAGIC || magic_number == FAT_CIGAM)
-		fat_nm(ptr);
+		handle_fat(ptr);
 	else if (magic_number == MH_MAGIC)
 		handle_32(ptr);
 	else if (!ft_strncmp(ptr, ARMAG, SARMAG))

@@ -6,11 +6,11 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 13:31:26 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 17:12:14 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/nm_otool.h"
+#include "../../inc/nm_otool.h"
 
 static void		symtab_building_bis(t_symtab *symt,
 	struct segment_command *seg, struct section *sect)
