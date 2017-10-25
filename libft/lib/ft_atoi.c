@@ -6,47 +6,48 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 12:25:22 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/18 14:05:04 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 13:20:41 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-static int	ft_check_digit(char *str)
+static int	ft_atoi_loop(const char *str, int i)
 {
-	int		i;
+	int		compt;
 
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\t' || (str[i] >= '0' && str[i] <= '9'))
+	compt = 0;
+	while (ft_isdigit(str[i]))
+	{
+		compt = compt * 10;
+		compt = compt + str[i] - '0';
 		i++;
-	if (i == (int)ft_strlen(str))
-		return (1);
-	return (0);
+	}
+	return (compt);
 }
 
-int			ft_atoi(char *str)
+int			ft_atoi(const char *str)
 {
-	long	sign;
-	long	nbr;
+	int		i;
+	int		compt;
+	int		min;
 
-	sign = 1;
-	while (*str == ' ' || *str == '\f' || *str == '\n' || *str == '\r' ||
-			*str == '\t' || *str == '\v')
-		str++;
-	if (*str == '-' || *str == '+')
+	i = 0;
+	compt = 0;
+	min = 0;
+	if (str == NULL)
+		return (0);
+	while (str[i] == ' ' || (str[i] >= 8 && str[i] <= 14))
+		i++;
+	if (str[i] == '-')
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		i++;
+		min++;
 	}
-	nbr = 0;
-	while (ft_isdigit((int)*str))
-	{
-		nbr = nbr * 10 + *str - '0';
-		str++;
-	}
-	if (!(sign * nbr <= 2147483647 && sign * nbr >= -2147483648) ||
-		ft_check_digit(str) != 1)
-		return (-1);
-	return (sign * nbr);
+	else if (str[i] == '+')
+		i++;
+	compt = ft_atoi_loop(str, i);
+	if (min > 0)
+		return (-compt);
+	return (compt);
 }

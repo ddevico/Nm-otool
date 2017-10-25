@@ -6,11 +6,37 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/24 11:06:51 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 13:35:53 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/nm_otool.h"
+
+void				order_off(t_offlist *lst)
+{
+	t_offlist	*cur;
+	uint32_t	tmp;
+	int			stop;
+
+	cur = lst;
+	stop = 1;
+	while (stop)
+	{
+		stop = 0;
+		cur = lst;
+		while (cur->next)
+		{
+			if (cur->off > cur->next->off)
+			{
+				stop = 1;
+				tmp = cur->off;
+				cur->off = cur->next->off;
+				cur->next->off = tmp;
+			}
+			cur = cur->next;
+		}
+	}
+}
 
 struct nlist		*fill_array(struct nlist *tab, int nsyms, char *stringtable)
 {
@@ -24,7 +50,8 @@ struct nlist		*fill_array(struct nlist *tab, int nsyms, char *stringtable)
 	return (tab2);
 }
 
-struct nlist		*tri_bulle(char *stringtable, struct nlist *tab, int nsyms)
+struct nlist		*tri_bulle_alpha(char *stringtable, struct nlist *tab,
+					int nsyms)
 {
 	int				i;
 	int				j;
@@ -65,7 +92,7 @@ struct nlist_64		*fill_array_64(struct nlist_64 *tab, int nsyms,
 	return (tab2);
 }
 
-struct nlist_64		*tri_bulle_64(char *stringtable, struct nlist_64 *tab,
+struct nlist_64		*tri_bulle_64_alpha(char *stringtable, struct nlist_64 *tab,
 	int nsyms)
 {
 	int				i;

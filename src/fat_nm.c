@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   fat_nm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 10:19:43 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 11:28:03 by ddevico          ###   ########.fr       */
+/*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
+/*   Updated: 2017/10/25 14:13:12 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "../inc/nm_otool.h"
 
-char	*ft_strchr(const char *s, int c)
+void		fat_nm(char *ptr);
 {
-	unsigned char		i;
+    struct fat_header	*fat;
 
-	i = c;
-	if (s == NULL)
-		return (NULL);
-	while (*s != i)
-	{
-		if (*s == '\0')
-			return (NULL);
-		s++;
-	}
-	return ((char *)s);
+    fat = (void *)ptr;
+    return;
 }

@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/24 13:09:34 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 14:08:10 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void			nm(char *ptr, char *name)
 	magic_number = *(int *)ptr;
 	if (magic_number == MH_MAGIC_64)
 		handle_64(ptr);
+	else if (magic_number == FAT_MAGIC || magic_number == FAT_CIGAM)
+		fat_nm(ptr);
 	else if (magic_number == MH_MAGIC)
 		handle_32(ptr);
-	else if (ft_strncmp(ptr, ARMAG, SARMAG) == 0)
-		ar_nm(ptr, name);
+	else if (!ft_strncmp(ptr, ARMAG, SARMAG))
+		handle_lib(ptr, name);
 	else
 		ft_printf("Fichier non gere: \n%s\n", ptr);
 }

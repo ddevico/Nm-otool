@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/24 11:06:35 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 13:31:26 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			print_output(struct symtab_command *sym,
 	lc = (void *)ptr + sizeof(*header);
 	array = (void *)ptr + sym->symoff;
 	stringtable = (void *)ptr + sym->stroff;
-	array = tri_bulle(stringtable, array, sym->nsyms);
+	array = tri_bulle_alpha(stringtable, array, sym->nsyms);
 	symtab_building(&symt, header, lc);
 	while (++i < sym->nsyms)
 		display_output(array[i], stringtable + array[i].n_un.n_strx, &symt);

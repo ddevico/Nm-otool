@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:47:55 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/24 13:09:17 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 14:12:02 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,94 +16,117 @@
 # include <sys/mman.h>
 # include <mach-o/loader.h>
 # include <mach-o/nlist.h>
+# include <mach-o/fat.h.h>
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <stdlib.h>
 # include <ar.h>
+# include <mach-o/ranlib.h>
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
 
-struct stat			g_stat;
-int					g_data;
-int					g_bss;
-int					g_text;
+struct stat				g_stat;
+int						g_data;
+int						g_bss;
+int						g_text;
 
-typedef struct		s_symtab
+typedef struct			s_symtab
 {
-	int				data;
-	int				bss;
-	int				text;
-	int				i;
-	int				j;
-	int				ns;
-	int				exec;
-}					t_symtab;
+	int					data;
+	int					bss;
+	int					text;
+	int					i;
+	int					j;
+	int					ns;
+	int					exec;
+}						t_symtab;
 
-int					ft_printf(const char *str, ...);
+typedef struct			s_offlist
+{
+	uint32_t			off;
+	uint32_t			strx;
+	struct s_offlist	*next;
+}						t_offlist;
+
+int						ft_printf(const char *str, ...);
 
 /*
 ** NM
 */
 
-t_symtab			init_symtab(t_symtab symt);
-int					print_error(char *file, char *str);
-void				nm(char *ptr, char *av);
-int					loop_arg(char *av);
+t_symtab				init_symtab(t_symtab symt);
+int						print_error(char *file, char *str);
+void					nm(char *ptr, char *av);
+int						loop_arg(char *av);
 
 /*
 ** DISPLAY
 */
 
-int					is_executable_file(void);
-char				type_n_sect(unsigned int n_sect, t_symtab *symt);
-char				get_type(uint32_t type, uint32_t n_sect, int value,
+int						is_executable_file(void);
+char					type_n_sect(unsigned int n_sect, t_symtab *symt);
+char					get_type(uint32_t type, uint32_t n_sect, int value,
 	t_symtab *symt);
-void				display_output(struct nlist elem, char *str,
+void					display_output(struct nlist elem, char *str,
 	t_symtab *symt);
-void				display_output_64(struct nlist_64 elem, char *str,
+void					display_output_64(struct nlist_64 elem, char *str,
 	t_symtab *symt);
 
 /*
 ** SORT
 */
 
-struct nlist		*fill_array(struct nlist *tab, int nsyms,
-	char *stringtable);
-struct nlist		*tri_bulle(char *stringtable, struct nlist *tab,
+struct nlist			*fill_array(struct nlist *tab, int nsyms,
+		char *stringtable);
+struct nlist			*tri_bulle_alpha(char *stringtable, struct nlist *tab,
 	int nsyms);
-struct nlist_64		*fill_array_64(struct nlist_64 *tab, int nsyms,
+struct nlist_64			*fill_array_64(struct nlist_64 *tab, int nsyms,
 	char *stringtable);
-struct nlist_64		*tri_bulle_64(char *stringtable, struct nlist_64 *tab,
-	int nsyms);
+struct nlist_64			*tri_bulle_64_alpha(char *stringtable,
+		struct nlist_64 *tab, int nsyms);
+void					order_off(t_offlist *lst);
 
 /*
 ** ARCH_64
 */
 
-static void			symtab_building_bis_64(t_symtab *symt,
+static void				symtab_building_bis_64(t_symtab *symt,
 	struct segment_command_64 *seg, struct section_64 *sect);
-void				symtab_building_64(t_symtab *symt,
+void					symtab_building_64(t_symtab *symt,
 	struct mach_header_64 *header, struct load_command *lc);
-void				print_output_64(struct symtab_command *sym,
+void					print_output_64(struct symtab_command *sym,
 	struct mach_header_64 *header, char *ptr);
-void				handle_64(char *ptr);
+void					handle_64(char *ptr);
 
 /*
 ** ARCH_32
 */
 
-static void			symtab_building_bis(t_symtab *symt,
+static void				symtab_building_bis(t_symtab *symt,
 	struct segment_command *seg, struct section *sect);
-void				symtab_building(t_symtab *symt,
+void					symtab_building(t_symtab *symt,
 	struct mach_header *header, struct load_command *lc);
-void				print_output(struct symtab_command *sym,
+void					print_output(struct symtab_command *sym,
 	struct mach_header *header, char *ptr);
-void				handle_32(char *ptr);
+void					handle_32(char *ptr);
 
 /*
 ** ARCH_32
 */
 
-void				ar_nm(char *ptr, char *name);
+void					handle_lib(char *ptr, char *name);
+
+/*
+** UTILS
+*/
+
+int						search_lst(t_offlist *lst, uint32_t off);
+
+/*
+** UTILS
+*/
+
+void					fat_nm(char *ptr);
+
 
 #endif

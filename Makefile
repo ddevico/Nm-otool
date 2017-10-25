@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/18 14:42:35 by ddevico           #+#    #+#              #
-#    Updated: 2017/10/24 13:56:47 by ddevico          ###   ########.fr        #
+#    Updated: 2017/10/25 14:12:20 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ SRC =	ft_nm.c \
 		display.c \
 		arch_64.c \
 		arch_32.c \
-		ar_nm.c
+		ar_nm.c	  \
+		utils.c   \
+		fat_nm.c
 
 VPATH	= $(SRC_DIR)
 
@@ -29,7 +31,7 @@ SRC_PATH= $(addprefix $(SRC_DIR)/, $(SRC))
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 
 HEADERS = -I includes/
 
@@ -59,6 +61,7 @@ res:
 	@mkdir -p res/
 	@cat /usr/include/mach-o/loader.h > res/loader.h
 	@cat /usr/include/mach-o/nlist.h > res/nlist.h
+	@cat /usr/include/mach-o/fat.h > res/fat.h
 	@cat /usr/include/ar.h > res/ar.h
 	@cat /usr/include/mach-o/ranlib.h > res/ranlib.h
 
@@ -79,7 +82,7 @@ norminette:
 	@echo "\n"----------------------- NORMINETTE LIBFT --------------------------"\n"
 	@norminette libft/lib/*.c libft/ft_printf/src/*.c libft/ft_printf/lib/*.c libft/inc/*.h
 	@echo "\n"----------------------- NORMINETTE NM -------------------------"\n"
-	@norminette src/*.c includes/nm_tool.h
+	@norminette src/*.c inc/nm_otool.h
 	@echo "\n"--------------------------- END -----------------------------------"\n"
 
 .PHONY: re fclean clean all norminette

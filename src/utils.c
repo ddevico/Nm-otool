@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 10:19:43 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 11:28:03 by ddevico          ###   ########.fr       */
+/*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
+/*   Updated: 2017/10/25 14:06:31 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "../inc/nm_otool.h"
 
-char	*ft_strchr(const char *s, int c)
+int		search_lst(t_offlist *lst, uint32_t off)
 {
-	unsigned char		i;
+	t_offlist	*cur;
 
-	i = c;
-	if (s == NULL)
-		return (NULL);
-	while (*s != i)
+	cur = lst;
+	while (cur)
 	{
-		if (*s == '\0')
-			return (NULL);
-		s++;
+		if (cur->off == off)
+			return (1);
+		cur = cur->next;
 	}
-	return ((char *)s);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 09:06:52 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/18 14:06:36 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 11:29:15 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 
-int					ft_atoi(char *str);
+int					ft_atoi(const char *str);
 
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
