@@ -6,24 +6,24 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 13:21:09 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 17:12:22 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 21:28:40 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-char			type_n_sect(unsigned int n_sect, t_symtab *symt)
+static char			type_n_sect(unsigned int n_sect, t_symtab *symt)
 {
-	if (n_sect == symt->text)
+	if (n_sect == (unsigned int)symt->text)
 		return ('T');
-	if (n_sect == symt->data)
+	if (n_sect == (unsigned int)symt->data)
 		return ('D');
-	if (n_sect == symt->bss)
+	if (n_sect == (unsigned int)symt->bss)
 		return ('B');
 	return ('S');
 }
 
-char			get_type(uint32_t type, uint32_t n_sect, int value,
+static char			get_type(uint32_t type, uint32_t n_sect, int value,
 	t_symtab *symt)
 {
 	char		c;

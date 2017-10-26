@@ -6,72 +6,43 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 17:12:20 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 21:06:30 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-static int				get_size(char *name)
+static void			print_ar_tool(uint32_t off, char *ptr, char *file)
 {
-	int		i;
-	char	*word;
-
-	word = ft_strchr(name, '/') + 1;
-	i = ft_atoi(word);
-	return (i);
-}
-
-static char			*get_name(char *name)
-{
-	char	*str;
-	int		length;
-
-	length = ft_strlen(ARFMAG);
-	str = ft_strstr(name, ARFMAG) + length;
-	return (str);
-}
-
-static t_offlist		*add_off(t_offlist *lst, uint32_t off, uint32_t strx)
-{
-	t_offlist	*tmp;
-	t_offlist	*tmp2;
-
-	tmp = (t_offlist*)malloc(sizeof(t_offlist));
-	tmp->off = off;
-	tmp->strx = strx;
-	tmp->next = NULL;
-	if (!lst)
-		return (tmp);
-	tmp2 = lst;
-	while (tmp2->next)
-		tmp2 = tmp2->next;
-	if (search_lst(lst, off))
-		return (lst);
-	tmp2->next = tmp;
-	return (lst);
-}
-
-static void			print_ar(t_offlist *lst, char *ptr, char *file)
-{
-	t_offlist		*tmp;
-	int				size_name;
+	int				size;
 	struct ar_hdr	*arch;
 	char			*name;
+
+	arch = (void*)ptr + off;
+	name = get_name(arch->ar_name);
+	size = get_size(arch->ar_name);
+	ft_putchar('\n');
+	ft_putstr(file);
+	ft_putchar('(');
+	ft_putstr(name);
+	ft_putchar(')');
+	ft_putstr(":\n");
+	//do_otool((void*)arch + sizeof(*arch) + size, file);
+}
+
+static void				print_ar(t_offlist *lst, char *ptr, char *name)
+{
+	t_offlist		*tmp;
 
 	tmp = lst;
 	while (tmp)
 	{
-		arch = (void*)ptr + tmp->off;
-		name = get_name(arch->ar_name);
-		size_name = get_size(arch->ar_name);
-		ft_printf("\n%s(%s):\n", file, name);
-		nm((void*)arch + sizeof(*arch) + size_name, file);
+		print_ar_tool(tmp->off, ptr, name);
 		tmp = tmp->next;
 	}
 }
 
-void			handle_lib(char *ptr, char *name)
+void			handle_lib_otool(char *ptr, char *name)
 {
 	struct ranlib	*ran;
 	t_offlist		*lst;

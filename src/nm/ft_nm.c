@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 17:12:24 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 21:03:20 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				print_error(char *file, char *str)
 
 void			nm(char *ptr, char *name)
 {
-	int	magic_number;
+	unsigned int magic_number;
 
 	magic_number = *(int *)ptr;
 	if (magic_number == MH_MAGIC_64)
@@ -47,7 +47,7 @@ void			nm(char *ptr, char *name)
 		ft_printf("Fichier non gere: \n%s\n", ptr);
 }
 
-int				loop_arg(char *av)
+static int				loop_arg(char *av)
 {
 	struct stat	buf;
 	int			fd;

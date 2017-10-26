@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arch_32.c                                          :+:      :+:    :+:   */
+/*   arch_64.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 17:12:14 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/25 21:31:39 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-static void		symtab_building_bis(t_symtab *symt,
-	struct segment_command *seg, struct section *sect)
+static void		symtab_building_bis_64(t_symtab *symt,
+	struct segment_command_64 *seg, struct section_64 *sect)
 {
 	symt->i = 0;
-	while (symt->i < seg->nsects)
+	while ((uint32_t)symt->i < seg->nsects)
 	{
 		if (ft_strcmp(sect->sectname, SECT_TEXT) == 0 &&
 		ft_strcmp(sect->segname, SEG_TEXT) == 0)
@@ -33,32 +33,32 @@ static void		symtab_building_bis(t_symtab *symt,
 	}
 }
 
-void			symtab_building(t_symtab *symt,
-	struct mach_header *header, struct load_command *lc)
+static void			symtab_building_64(t_symtab *symt,
+	struct mach_header_64 *header, struct load_command *lc)
 {
-	struct segment_command	*seg;
-	struct section			*sect;
+	struct segment_command_64	*seg;
+	struct section_64			*sect;
 
-	while (symt->j < header->ncmds)
+	while ((uint32_t)symt->j < header->ncmds)
 	{
-		if (lc->cmd == LC_SEGMENT)
+		if (lc->cmd == LC_SEGMENT_64)
 		{
-			seg = (struct segment_command *)lc;
-			sect = (struct section *)((void *)seg + sizeof(*seg));
-			symtab_building_bis(symt, seg, sect);
+			seg = (struct segment_command_64 *)lc;
+			sect = (struct section_64 *)((void *)seg + sizeof(*seg));
+			symtab_building_bis_64(symt, seg, sect);
 		}
 		lc = (void *)lc + lc->cmdsize;
 		symt->j++;
 	}
 }
 
-void			print_output(struct symtab_command *sym,
-	struct mach_header *header, char *ptr)
+static void			print_output_64(struct symtab_command *sym,
+	struct mach_header_64 *header, char *ptr)
 {
-	int					i;
+	uint32_t					i;
 	struct load_command	*lc;
 	char				*stringtable;
-	struct nlist		*array;
+	struct nlist_64		*array;
 	t_symtab			symt;
 
 	symt = init_symtab(symt);
@@ -66,22 +66,22 @@ void			print_output(struct symtab_command *sym,
 	lc = (void *)ptr + sizeof(*header);
 	array = (void *)ptr + sym->symoff;
 	stringtable = (void *)ptr + sym->stroff;
-	array = tri_bulle_alpha(stringtable, array, sym->nsyms);
-	symtab_building(&symt, header, lc);
+	array = tri_bulle_64_alpha(stringtable, array, sym->nsyms);
+	symtab_building_64(&symt, header, lc);
 	while (++i < sym->nsyms)
-		display_output(array[i], stringtable + array[i].n_un.n_strx, &symt);
+		display_output_64(array[i], stringtable + array[i].n_un.n_strx, &symt);
 }
 
-void			handle_32(char *ptr)
+void			handle_64(char *ptr)
 {
 	int						i;
 	int						ncmds;
-	struct mach_header		*header;
+	struct mach_header_64	*header;
 	struct load_command		*lc;
 	struct symtab_command	*sym;
 
 	i = -1;
-	header = (struct mach_header *)ptr;
+	header = (struct mach_header_64 *)ptr;
 	ncmds = header->ncmds;
 	lc = (void *)ptr + sizeof(*header);
 	while (++i < ncmds)
@@ -89,7 +89,7 @@ void			handle_32(char *ptr)
 		if (lc->cmd == LC_SYMTAB)
 		{
 			sym = (struct symtab_command *)lc;
-			print_output(sym, header, ptr);
+			print_output_64(sym, header, ptr);
 			break ;
 		}
 		lc = (void *)lc + lc->cmdsize;
