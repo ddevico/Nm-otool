@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/18 14:42:35 by ddevico           #+#    #+#              #
-#    Updated: 2017/10/25 21:41:32 by davydevico       ###   ########.fr        #
+#    Updated: 2017/10/27 09:51:53 by davydevico       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME_OTOOL	=	ft_otool
 SRC_DIR_NM	= ./src/nm
 SRC_DIR_OTOOL	= ./src/otool
 
-SRC_NM =	ft_nm.c \
+SRC_NM =	main.c \
+		ft_nm.c \
 		sort.c \
 		display.c \
 		arch_64.c \
@@ -25,14 +26,28 @@ SRC_NM =	ft_nm.c \
 		utils.c   \
 		arch_fat.c
 
-SRC_OTOOL =	ft_otool.c \
+SRC_NM_NO_MAIN = ft_nm.c \
+		sort.c \
+		display.c \
+		arch_64.c \
+		arch_32.c \
+		arch_lib.c \
+		utils.c   \
+		arch_fat.c
+
+SRC_OTOOL =	main.c \
+						ft_otool.c \
 						arch_lib.c \
+						arch_fat.c \
+						arch_64.c \
 
 
 O_DIR_NM	= ./obj/nm
 OBJ_NM		= $(addprefix $(SRC_DIR_NM)/,$(SRC_NM:.c=.o))
 O_DIR_OTOOL	= ./obj/otool
 OBJ_OTOOL		= $(addprefix $(SRC_DIR_OTOOL)/,$(SRC_OTOOL:.c=.o))
+
+O_NM_NO_MAIN = $(addprefix $(SRC_DIR_NM)/,$(SRC_NM_NO_MAIN))
 
 CC = gcc
 
@@ -64,7 +79,7 @@ ft_otool: obj $(OBJ_OTOOL)
 		@echo "\n"---------------------- OTOOL COMPILING -------------------------
 		@echo "\n\033[31m==> COMPILING in progress ...\033[0m\n"
 		@make -C libft
-		@$(CC) $(WFLAGS) $(HEADERS) -o $@ $(OBJ_OTOOL) $(LIBFT) $(I_PRINTF)
+		@$(CC) $(WFLAGS) $(O_NM_NO_MAIN) $(HEADERS) -o $@ $(OBJ_OTOOL) $(LIBFT) $(I_PRINTF)
 		@echo "\033[37mNM: \033[35mOK\n"
 		@echo "\033[32m==> SUCCESS !\033[0m\n"
 
@@ -86,7 +101,7 @@ res:
 clean:
 	@echo "\n"----------------------- NM CLEAN ---------------------------
 	@echo "\n\033[35m==> CLEANING in progress ...\033[0m\n"
-	@rm -rf $(OBJ_NM) $(NAME_NM)
+	@rm -rf $(OBJ_NM) $(OBJ_OTOOL) $(NAME_NM) $(NAME_OTOOL)
 
 fclean: clean
 	@make fclean -C libft

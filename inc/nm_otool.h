@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:47:55 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 21:07:59 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/26 16:01:56 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,9 @@ void					handle_fat(char *ptr);
 
 void 					otool(void *ptr, char *name);
 void					handle_lib_otool(char *ptr, char *name);
+void					handle_fat_otool(char *ptr);
+void					handle_64_otool(void *ptr);
+
+
 
 #endif

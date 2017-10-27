@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 21:06:30 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/26 10:31:38 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 static void			print_ar_tool(uint32_t off, char *ptr, char *file)
 {
 	int				size;
-	struct ar_hdr	*arch;
+	struct ar_hdr	*ar;
 	char			*name;
 
-	arch = (void*)ptr + off;
-	name = get_name(arch->ar_name);
-	size = get_size(arch->ar_name);
+	ar = (void*)ptr + off;
+	name = get_name(ar->ar_name);
+	size = get_size(ar->ar_name);
 	ft_putchar('\n');
 	ft_putstr(file);
 	ft_putchar('(');
 	ft_putstr(name);
 	ft_putchar(')');
 	ft_putstr(":\n");
-	//do_otool((void*)arch + sizeof(*arch) + size, file);
+	otool((void*)ar + sizeof(*ar) + size, file);
 }
 
-static void				print_ar(t_offlist *lst, char *ptr, char *name)
+static void				print_arch(t_offlist *lst, char *ptr, char *name)
 {
 	t_offlist		*tmp;
 
@@ -58,5 +58,5 @@ void			handle_lib_otool(char *ptr, char *name)
 	i = -1;
 	while (++i < size)
 		lst = add_off(lst, ran[i].ran_off, ran[i].ran_un.ran_strx);
-	print_ar(order_off(lst), ptr, name);
+	print_arch(order_off(lst), ptr, name);
 }

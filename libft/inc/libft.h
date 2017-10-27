@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 09:06:52 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 11:29:15 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/26 15:57:52 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
-char				*ft_itoa_base(unsigned long long value, int base);
+char				*ft_itoa_base(int val, int base, int output_size);
 char				*ft_itoa_base_maj(unsigned long long value, int base);
 char				*ft_itohex(int n, int nb_z);
 
