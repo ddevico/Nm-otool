@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arch_64.c                                          :+:      :+:    :+:   */
+/*   arch_32.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/27 15:12:42 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/27 15:12:22 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void			display_output_otool(long unsigned int addr, unsigned int size, ch
 		{
 			if (i != 0)
 				addr += 16;
-			ft_printf("%016llx\t", addr);
+      		ft_printf("%08llx\t", addr);
 		}
 		str = ft_itoa_base(ptr[i], 16, 2);
 		ft_printf("%s ", str);
@@ -36,14 +36,14 @@ static void			display_output_otool(long unsigned int addr, unsigned int size, ch
 	ft_printf("\n");
 }
 
-static void						print_output_64(\
-					struct segment_command_64 *seg, struct mach_header_64 *mo)
+static void						print_output_32(\
+					struct segment_command *seg, struct mach_header *mo)
 {
-	struct section_64			*sect;
+  struct section			*sect;
 	unsigned int				i;
 
 	i = 0;
-	sect = (struct section_64 *)((void *)seg + sizeof(*seg));
+  sect = (struct section *)((void *)seg + sizeof(*seg));
 	while (i < seg->nsects)
 	{
 		if (!ft_strcmp(sect->sectname, "__text") && !ft_strcmp(sect->segname, "__TEXT"))
@@ -51,28 +51,28 @@ static void						print_output_64(\
 			ft_printf("Contents of (__TEXT,__text) section\n");
 			display_output_otool(sect->addr, sect->size, (char *)mo + sect->offset);
 		}
-		sect = (struct section_64*)((void*)sect + sizeof(struct section_64));
+		sect = (struct section*)((void*)sect + sizeof(struct section));
 		i++;
 	}
 }
 
-void			handle_64_otool(void *ptr)
+void			handle_32_otool(void *ptr)
 {
-	unsigned int				i;
- 	struct mach_header_64		*header;
+  unsigned int				i;
+  struct mach_header		*header;
 	struct load_command			*lc;
-	struct segment_command_64	*seg;
+  struct segment_command	*seg;
 
 	i = 0;
   	header = ptr;
-	lc = ptr + sizeof(struct mach_header_64);
+	lc = ptr + sizeof(struct mach_header);
 	while (++i < header->ncmds)
 	{
-		if (lc->cmd == LC_SEGMENT_64)
-    	{
-			seg = (struct segment_command_64*)lc;
-			print_output_64(seg, header);
-    	}
-    	lc = (void *)lc + lc->cmdsize;
+		if (lc->cmd == LC_SEGMENT)
+    {
+    	seg = (struct segment_command*)lc;
+      print_output_32(seg, header);
+    }
+    lc = (void *)lc + lc->cmdsize;
 	}
 }

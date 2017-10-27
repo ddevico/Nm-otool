@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/26 16:25:19 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/27 15:54:45 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int				loop_arg(char *av)
 	struct stat	buf;
 	int			fd;
 	void		*ptr;
+	unsigned int magic_number;
 
 	if ((fd = open(av, O_RDONLY)) < 0)
 		return (print_error(av, "No such file or directory"));
@@ -26,10 +27,13 @@ static int				loop_arg(char *av)
 	== MAP_FAILED)
 		return (print_error(av, "Is a directory"));
 	g_stat = buf;
+	magic_number = *(int *)ptr;
+	if (magic_number == MH_MAGIC_64 || magic_number == MH_MAGIC)
+		ft_printf("%s:\n", av);
 	otool(ptr, av);
 	if (munmap(ptr, buf.st_size) < 0)
 		return (print_error(av, "Error with munmap"));
-	return (1);
+	return (0);
 }
 
 int				main(int ac, char **av)
@@ -43,7 +47,6 @@ int				main(int ac, char **av)
 		ft_printf("Bad argument\n");
 	while (i < ac)
 	{
-		ft_printf("Archive : %s\n", av[i]);
 		str = av[i];
 		loop_arg(str);
 		i++;

@@ -6,11 +6,41 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 20:33:18 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/27 10:43:22 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
+
+static void		sort_duplicate_strx_by_value(struct nlist *array,
+	char *stringtable, uint32_t size)
+{
+	uint64_t		tmp_value;
+	int				sorted;
+	uint32_t		increment;
+
+	sorted = 0;
+	tmp_value = 0;
+	while (!sorted)
+	{
+		sorted = 1;
+		increment = -1;
+		while ((uint32_t)++increment < size - 1)
+		{
+			if (ft_strcmp(stringtable + array[increment].n_un.n_strx,
+				stringtable + array[increment + 1].n_un.n_strx) == 0)
+			{
+				if (array[increment].n_value > array[increment + 1].n_value)
+				{
+					tmp_value = array[increment + 1].n_value;
+					array[increment + 1].n_value = array[increment].n_value;
+					array[increment].n_value = tmp_value;
+					sorted = 0;
+				}
+			}
+		}
+	}
+}
 
 static void		symtab_building_bis(t_symtab *symt,
 	struct segment_command *seg, struct section *sect)
@@ -67,6 +97,7 @@ static void			print_output(struct symtab_command *sym,
 	array = (void *)ptr + sym->symoff;
 	stringtable = (void *)ptr + sym->stroff;
 	array = tri_bulle_alpha(stringtable, array, sym->nsyms);
+	sort_duplicate_strx_by_value(array, stringtable, sym->nsyms);
 	symtab_building(&symt, header, lc);
 	while (++i < sym->nsyms)
 		display_output(array[i], stringtable + array[i].n_un.n_strx, &symt);

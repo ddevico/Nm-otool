@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 13:21:09 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 21:28:40 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/27 10:37:27 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void			display_output(struct nlist elem, char *str, t_symtab *symt)
 	char		c;
 
 	c = get_type(elem.n_type, elem.n_sect, elem.n_value, symt);
+	if (ft_strcmp("radr://5614542", str) == 0)
+		return ;
 	if (elem.n_value == 0 && (c == 'U' || c == 'u'))
 	{
 		if (ft_strcmp("__mh_execute_header", str) == 0)
@@ -60,7 +62,7 @@ void			display_output(struct nlist elem, char *str, t_symtab *symt)
 			ft_printf("%8c %c %s\n", ' ', c, str);
 	}
 	else
-		ft_printf("%016llx %c %s\n", elem.n_value, c, str);
+		ft_printf("%08llx %c %s\n", elem.n_value, c, str);
 }
 
 void			display_output_64(struct nlist_64 elem, char *str,
@@ -69,6 +71,8 @@ void			display_output_64(struct nlist_64 elem, char *str,
 	char		c;
 
 	c = get_type(elem.n_type, elem.n_sect, elem.n_value, symt);
+	if (ft_strcmp("radr://5614542", str) == 0)
+		return ;
 	if (elem.n_value == 0 && (c == 'U' || c == 'u'))
 	{
 		if (ft_strcmp("__mh_execute_header", str) == 0)

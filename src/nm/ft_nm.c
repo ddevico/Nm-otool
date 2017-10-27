@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/26 10:07:28 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/27 10:36:15 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ void			nm(char *ptr, char *name)
 	else if (!ft_strncmp(ptr, ARMAG, SARMAG))
 		handle_lib(ptr, name);
 	else
-		ft_printf("Fichier non gere: \n%s\n", ptr);
+		return ;
 }

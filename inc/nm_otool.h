@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:47:55 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/26 16:01:56 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/27 12:07:05 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int					get_size(char *name);
 char					*get_name(char *name);
 t_offlist		*add_off(t_offlist *lst, uint32_t off, uint32_t strx);
 void					handle_lib(char *ptr, char *name);
-int						search_lst(t_offlist *lst, uint32_t off);
+int						search_lst(t_offlist *lst, uint32_t off, uint32_t strx);
 void					handle_fat(char *ptr);
 
 /*
@@ -82,6 +82,7 @@ void					handle_fat(char *ptr);
 void 					otool(void *ptr, char *name);
 void					handle_lib_otool(char *ptr, char *name);
 void					handle_fat_otool(char *ptr);
+void					handle_32_otool(void *ptr);
 void					handle_64_otool(void *ptr);
 
 

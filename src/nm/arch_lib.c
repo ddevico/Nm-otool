@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/26 10:08:00 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/27 14:36:54 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ t_offlist		*add_off(t_offlist *lst, uint32_t off, uint32_t strx)
 	tmp2 = lst;
 	while (tmp2->next)
 		tmp2 = tmp2->next;
-	if (search_lst(lst, off))
+	if (search_lst(lst, off, strx))
+	{
 		return (lst);
+	}
 	tmp2->next = tmp;
 	return (lst);
 }
@@ -82,7 +84,7 @@ void			handle_lib(char *ptr, char *name)
 	lst = NULL;
 	i = get_size((void*)ptr + SARMAG);
 	offset_struct = (void*)ptr + sizeof(struct ar_hdr) + SARMAG + i;
-	ran = (void*)ptr + sizeof(struct ar_hdr) + SARMAG + i + sizeof(uint32_t);
+	ran = (void*)ptr + sizeof(struct ar_hdr) + SARMAG + i + 4;
 	size = (*((int *)offset_struct)) / sizeof(struct ranlib);
 	i = -1;
 	while (++i < size)

@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/26 10:08:25 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/27 15:54:47 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int				loop_arg(char *av)
 	nm(ptr, av);
 	if (munmap(ptr, buf.st_size) < 0)
 		return (print_error(av, "Error with munmap"));
-	return (1);
+	return (0);
 }
 
 int				main(int ac, char **av)

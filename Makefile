@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/18 14:42:35 by ddevico           #+#    #+#              #
-#    Updated: 2017/10/27 09:51:53 by davydevico       ###   ########.fr        #
+#    Updated: 2017/10/27 12:07:33 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,11 @@ SRC_NM_NO_MAIN = ft_nm.c \
 		arch_fat.c
 
 SRC_OTOOL =	main.c \
-						ft_otool.c \
-						arch_lib.c \
-						arch_fat.c \
-						arch_64.c \
+			ft_otool.c \
+			arch_lib.c \
+			arch_fat.c \
+			arch_64.c \
+			arch_32.c \
 
 
 O_DIR_NM	= ./obj/nm

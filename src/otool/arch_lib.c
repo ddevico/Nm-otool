@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/26 10:31:38 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/27 15:12:48 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@ static void			print_ar_tool(uint32_t off, char *ptr, char *file)
 	ar = (void*)ptr + off;
 	name = get_name(ar->ar_name);
 	size = get_size(ar->ar_name);
-	ft_putchar('\n');
-	ft_putstr(file);
-	ft_putchar('(');
-	ft_putstr(name);
-	ft_putchar(')');
-	ft_putstr(":\n");
+	ft_printf("%s(%s):\n", file, name);
 	otool((void*)ar + sizeof(*ar) + size, file);
 }
 
