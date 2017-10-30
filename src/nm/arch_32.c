@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 10:18:11 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/30 11:43:29 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,19 @@ void						symtab_building(t_symtab *symt,
 static void					print_output(struct symtab_command *sym,
 							struct mach_header *header, char *ptr, char *name)
 {
-	int						i;
+	unsigned int			i;
 	struct load_command		*lc;
 	char					*stringtable;
 	struct nlist			*array;
 	t_symtab				symt;
 
-	symt = init_symtab(symt);
+	symt = init_symtab();
 	i = -1;
 	lc = (void *)ptr + sizeof(*header);
+	array = (void *)ptr + sym->symoff;
+	stringtable = (void *)ptr + sym->stroff;
 	if (!try_option(2))
-	{
 		array = tri_bulle_alpha(stringtable, array, sym->nsyms);
-		sort_duplicate_strx_by_value(array, stringtable, sym->nsyms);
-	}
-	array = tri_bulle_alpha(stringtable, array, sym->nsyms);
 	sort_duplicate_strx_by_value(array, stringtable, sym->nsyms);
 	symtab_building(&symt, header, lc);
 	while (++i < sym->nsyms)

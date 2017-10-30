@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/18 14:42:35 by ddevico           #+#    #+#              #
-#    Updated: 2017/10/30 10:10:37 by ddevico          ###   ########.fr        #
+#    Updated: 2017/10/30 11:23:52 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ O_NM_NO_MAIN = $(addprefix $(SRC_DIR_NM)/,$(SRC_NM_NO_MAIN))
 
 CC = gcc
 
-CFLAGS = #-Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 
 HEADERS = -I inc/
 

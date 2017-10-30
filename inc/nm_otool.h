@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:47:55 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 10:21:07 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/30 11:48:55 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int						ft_printf(const char *str, ...);
 ** NM
 */
 
-t_symtab				init_symtab(t_symtab symt);
+t_symtab				init_symtab(void);
 int						print_error(char *file, char *str);
 void					nm(char *ptr, char *av);
 char					get_type(uint32_t type, uint32_t n_sect, int value,
@@ -74,7 +74,7 @@ int						get_size(char *name);
 char					*get_name(char *name);
 t_offlist				*add_off(t_offlist *lst, uint32_t off, uint32_t strx);
 void					handle_lib(char *ptr, char *name);
-int						search_lst(t_offlist *lst, uint32_t off, uint32_t strx);
+int						search_lst(t_offlist *lst, uint32_t off);
 void					handle_fat(char *ptr);
 int						try_option(int number);
 void					choose_bonus(struct nlist elem, char *str,

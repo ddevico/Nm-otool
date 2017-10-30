@@ -6,14 +6,16 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 09:25:19 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/30 11:48:48 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-t_symtab		init_symtab(t_symtab symt)
+t_symtab		init_symtab(void)
 {
+	t_symtab	symt;
+
 	symt.data = 0;
 	symt.bss = 0;
 	symt.text = 0;

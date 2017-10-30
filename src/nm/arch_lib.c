@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 10:15:55 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/30 11:41:23 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ t_offlist			*add_off(t_offlist *lst, uint32_t off, uint32_t strx)
 	tmp2 = lst;
 	while (tmp2->next)
 		tmp2 = tmp2->next;
-	if (search_lst(lst, off, strx))
-	{
+	if (search_lst(lst, off))
 		return (lst);
-	}
 	tmp2->next = tmp;
 	return (lst);
 }
