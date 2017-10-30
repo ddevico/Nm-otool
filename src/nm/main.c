@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 10:55:36 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/30 14:52:29 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ int						main(int ac, char **av)
 				return (0);
 			i++;
 		}
-		if (ac - ft_count_opt(av) > 2 && ft_strcmp(av[1], "-A"))
+		if (ac - ft_count_opt(av) > 2 && ft_strcmp(av[1], "-A")
+			&& (av[i][ft_strlen(av[i]) - 1] != 'a'))
 			ft_printf("\n%s:\n", av[i]);
 		str = av[i];
 		loop_arg(str);
