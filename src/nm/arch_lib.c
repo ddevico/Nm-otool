@@ -6,36 +6,36 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/27 14:36:54 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/30 10:15:55 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-int				get_size(char *name)
+int					get_size(char *name)
 {
-	int		i;
-	char	*word;
+	int				i;
+	char			*word;
 
 	word = ft_strchr(name, '/') + 1;
 	i = ft_atoi(word);
 	return (i);
 }
 
-char			*get_name(char *name)
+char				*get_name(char *name)
 {
-	char	*str;
-	int		length;
+	char			*str;
+	int				length;
 
 	length = ft_strlen(ARFMAG);
 	str = ft_strstr(name, ARFMAG) + length;
 	return (str);
 }
 
-t_offlist		*add_off(t_offlist *lst, uint32_t off, uint32_t strx)
+t_offlist			*add_off(t_offlist *lst, uint32_t off, uint32_t strx)
 {
-	t_offlist	*tmp;
-	t_offlist	*tmp2;
+	t_offlist		*tmp;
+	t_offlist		*tmp2;
 
 	tmp = (t_offlist*)malloc(sizeof(t_offlist));
 	tmp->off = off;
@@ -73,7 +73,7 @@ static void			print_ar(t_offlist *lst, char *ptr, char *file)
 	}
 }
 
-void			handle_lib(char *ptr, char *name)
+void				handle_lib(char *ptr, char *name)
 {
 	struct ranlib	*ran;
 	t_offlist		*lst;

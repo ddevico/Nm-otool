@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/27 15:12:48 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/29 16:54:45 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void			print_ar_tool(uint32_t off, char *ptr, char *file)
 	otool((void*)ar + sizeof(*ar) + size, file);
 }
 
-static void				print_arch(t_offlist *lst, char *ptr, char *name)
+static void			print_arch(t_offlist *lst, char *ptr, char *name)
 {
 	t_offlist		*tmp;
 
@@ -37,7 +37,7 @@ static void				print_arch(t_offlist *lst, char *ptr, char *name)
 	}
 }
 
-void			handle_lib_otool(char *ptr, char *name)
+void				handle_lib_otool(char *ptr, char *name)
 {
 	struct ranlib	*ran;
 	t_offlist		*lst;

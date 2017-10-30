@@ -6,7 +6,7 @@
 #    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/18 14:42:35 by ddevico           #+#    #+#              #
-#    Updated: 2017/10/27 12:07:33 by ddevico          ###   ########.fr        #
+#    Updated: 2017/10/30 10:10:37 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC_NM =	main.c \
 		arch_32.c \
 		arch_lib.c \
 		utils.c   \
-		arch_fat.c
+		arch_fat.c \
+		opt.c		\
 
 SRC_NM_NO_MAIN = ft_nm.c \
 		sort.c \
@@ -33,7 +34,8 @@ SRC_NM_NO_MAIN = ft_nm.c \
 		arch_32.c \
 		arch_lib.c \
 		utils.c   \
-		arch_fat.c
+		arch_fat.c \
+		opt.c		\
 
 SRC_OTOOL =	main.c \
 			ft_otool.c \
@@ -41,6 +43,7 @@ SRC_OTOOL =	main.c \
 			arch_fat.c \
 			arch_64.c \
 			arch_32.c \
+			display_otool.c \
 
 
 O_DIR_NM	= ./obj/nm
@@ -68,28 +71,22 @@ $(NAME_NM): ft_nm
 
 $(NAME_OTOOL): ft_otool
 
-ft_nm: obj $(OBJ_NM)
+ft_nm: $(OBJ_NM)
 	@echo "\n"---------------------- NM COMPILING -------------------------
 	@echo "\n\033[31m==> COMPILING in progress ...\033[0m\n"
 	@make -C libft
 	@$(CC) $(WFLAGS) -o $@ $(OBJ_NM) $(HEADERS) $(LIBFT) $(I_PRINTF)
-	@echo "\033[37mNM: \033[35mOK\n"
-	@echo "\033[32m==> SUCCESS !\033[0m\n"
+	@echo "\n\033[32m==> SUCCESS !\033[0m\n"
 
-ft_otool: obj $(OBJ_OTOOL)
+ft_otool: $(OBJ_OTOOL)
 		@echo "\n"---------------------- OTOOL COMPILING -------------------------
 		@echo "\n\033[31m==> COMPILING in progress ...\033[0m\n"
 		@make -C libft
 		@$(CC) $(WFLAGS) $(O_NM_NO_MAIN) $(HEADERS) -o $@ $(OBJ_OTOOL) $(LIBFT) $(I_PRINTF)
-		@echo "\033[37mNM: \033[35mOK\n"
-		@echo "\033[32m==> SUCCESS !\033[0m\n"
+		@echo "\n\033[32m==> SUCCESS !\033[0m\n"
 
 obj/%.o: %.c
 	@$(CC) $(WFLAGS) $(HEADERS) -o $@ -c $< $(I_LIBFT)
-
-obj:
-	@mkdir -p obj/nm
-	@mkdir -p obj/otool
 
 res:
 	@mkdir -p res/
@@ -116,7 +113,7 @@ norminette:
 	@echo "\n"----------------------- NORMINETTE LIBFT --------------------------"\n"
 	@norminette libft/lib/*.c libft/ft_printf/src/*.c libft/ft_printf/lib/*.c libft/inc/*.h
 	@echo "\n"----------------------- NORMINETTE NM -------------------------"\n"
-	@norminette src/*.c inc/nm_otool.h
+	@norminette src/nm/*.c src/otool/*.c inc/nm_otool.h
 	@echo "\n"--------------------------- END -----------------------------------"\n"
 
 .PHONY: re fclean clean all norminette

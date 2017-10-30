@@ -6,18 +6,18 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/27 10:43:22 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/30 10:18:11 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-static void		sort_duplicate_strx_by_value(struct nlist *array,
+static void					sort_duplicate_strx_by_value(struct nlist *array,
 	char *stringtable, uint32_t size)
 {
-	uint64_t		tmp_value;
-	int				sorted;
-	uint32_t		increment;
+	uint64_t				tmp_value;
+	int						sorted;
+	uint32_t				increment;
 
 	sorted = 0;
 	tmp_value = 0;
@@ -42,11 +42,13 @@ static void		sort_duplicate_strx_by_value(struct nlist *array,
 	}
 }
 
-static void		symtab_building_bis(t_symtab *symt,
+static void					symtab_building_bis(t_symtab *symt,
 	struct segment_command *seg, struct section *sect)
 {
-	symt->i = 0;
-	while (symt->i < seg->nsects)
+	uint32_t				i;
+
+	i = 0;
+	while (i < seg->nsects)
 	{
 		if (ft_strcmp(sect->sectname, SECT_TEXT) == 0 &&
 		ft_strcmp(sect->segname, SEG_TEXT) == 0)
@@ -59,17 +61,19 @@ static void		symtab_building_bis(t_symtab *symt,
 			symt->bss = symt->ns;
 		sect = (void *)sect + sizeof(*sect);
 		symt->ns++;
-		symt->i++;
+		i++;
 	}
 }
 
-static void			symtab_building(t_symtab *symt,
-	struct mach_header *header, struct load_command *lc)
+void						symtab_building(t_symtab *symt,
+							struct mach_header *header, struct load_command *lc)
 {
+	uint32_t				i;
 	struct segment_command	*seg;
 	struct section			*sect;
 
-	while (symt->j < header->ncmds)
+	i = 0;
+	while (i < header->ncmds)
 	{
 		if (lc->cmd == LC_SEGMENT)
 		{
@@ -78,32 +82,36 @@ static void			symtab_building(t_symtab *symt,
 			symtab_building_bis(symt, seg, sect);
 		}
 		lc = (void *)lc + lc->cmdsize;
-		symt->j++;
+		i++;
 	}
 }
 
-static void			print_output(struct symtab_command *sym,
-	struct mach_header *header, char *ptr)
+static void					print_output(struct symtab_command *sym,
+							struct mach_header *header, char *ptr, char *name)
 {
-	int					i;
-	struct load_command	*lc;
-	char				*stringtable;
-	struct nlist		*array;
-	t_symtab			symt;
+	int						i;
+	struct load_command		*lc;
+	char					*stringtable;
+	struct nlist			*array;
+	t_symtab				symt;
 
 	symt = init_symtab(symt);
 	i = -1;
 	lc = (void *)ptr + sizeof(*header);
-	array = (void *)ptr + sym->symoff;
-	stringtable = (void *)ptr + sym->stroff;
+	if (!try_option(2))
+	{
+		array = tri_bulle_alpha(stringtable, array, sym->nsyms);
+		sort_duplicate_strx_by_value(array, stringtable, sym->nsyms);
+	}
 	array = tri_bulle_alpha(stringtable, array, sym->nsyms);
 	sort_duplicate_strx_by_value(array, stringtable, sym->nsyms);
 	symtab_building(&symt, header, lc);
 	while (++i < sym->nsyms)
-		display_output(array[i], stringtable + array[i].n_un.n_strx, &symt);
+		choose_bonus(array[i], stringtable + array[i].n_un.n_strx,
+		&symt, name);
 }
 
-void			handle_32(char *ptr)
+void						handle_32(char *ptr, char *name)
 {
 	int						i;
 	int						ncmds;
@@ -120,7 +128,7 @@ void			handle_32(char *ptr)
 		if (lc->cmd == LC_SYMTAB)
 		{
 			sym = (struct symtab_command *)lc;
-			print_output(sym, header, ptr);
+			print_output(sym, header, ptr, name);
 			break ;
 		}
 		lc = (void *)lc + lc->cmdsize;

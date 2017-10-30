@@ -6,14 +6,14 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 16:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/26 15:59:31 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/30 10:15:14 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../inc/libft.h"
 
-static int	ft_sizer(unsigned long long *value, int base)
+static int				ft_sizer(unsigned long long *value, int base)
 {
 	int					tall;
 	unsigned long long	bis;
@@ -28,19 +28,19 @@ static int	ft_sizer(unsigned long long *value, int base)
 	return (tall);
 }
 
-static char		read_tab(int i)
+static char				read_tab(int i)
 {
-	char	*tab;
+	char				*tab;
 
 	tab = "0123456789abcdefghijklmnopqrstuvwxyz";
 	return (tab[i]);
 }
 
-char		*ft_itoa_base(int val, int base, int output_size)
+char					*ft_itoa_base(int val, int base, int output_size)
 {
-	char			buffer[output_size + 1];
-	char			*p;
-	unsigned int	unsigned_val;
+	char				buffer[output_size + 1];
+	char				*p;
+	unsigned int		unsigned_val;
 
 	unsigned_val = (unsigned int)val;
 	if (base > 36 || base < 2)
@@ -64,10 +64,10 @@ char		*ft_itoa_base(int val, int base, int output_size)
 	return (ft_strdup(p));
 }
 
-char		*ft_itoa_base_maj(unsigned long long value, int base)
+char					*ft_itoa_base_maj(unsigned long long value, int base)
 {
-	char	*s;
-	int		tall;
+	char				*s;
+	int					tall;
 
 	if (value == 0)
 		return (ft_strdup("0"));

@@ -6,13 +6,13 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 13:21:09 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/27 10:37:27 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/30 09:15:19 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-static char			type_n_sect(unsigned int n_sect, t_symtab *symt)
+static char		type_n_sect(unsigned int n_sect, t_symtab *symt)
 {
 	if (n_sect == (unsigned int)symt->text)
 		return ('T');
@@ -23,7 +23,7 @@ static char			type_n_sect(unsigned int n_sect, t_symtab *symt)
 	return ('S');
 }
 
-static char			get_type(uint32_t type, uint32_t n_sect, int value,
+char			get_type(uint32_t type, uint32_t n_sect, int value,
 	t_symtab *symt)
 {
 	char		c;
@@ -47,11 +47,14 @@ static char			get_type(uint32_t type, uint32_t n_sect, int value,
 	return (c);
 }
 
-void			display_output(struct nlist elem, char *str, t_symtab *symt)
+void			display_output(struct nlist elem, char *str, t_symtab *symt,
+				char *name)
 {
 	char		c;
 
 	c = get_type(elem.n_type, elem.n_sect, elem.n_value, symt);
+	if (try_option(1))
+		ft_printf("%s: ", name);
 	if (ft_strcmp("radr://5614542", str) == 0)
 		return ;
 	if (elem.n_value == 0 && (c == 'U' || c == 'u'))
@@ -66,11 +69,13 @@ void			display_output(struct nlist elem, char *str, t_symtab *symt)
 }
 
 void			display_output_64(struct nlist_64 elem, char *str,
-	t_symtab *symt)
+	t_symtab *symt, char *name)
 {
 	char		c;
 
 	c = get_type(elem.n_type, elem.n_sect, elem.n_value, symt);
+	if (try_option(1))
+		ft_printf("%s: ", name);
 	if (ft_strcmp("radr://5614542", str) == 0)
 		return ;
 	if (elem.n_value == 0 && (c == 'U' || c == 'u'))

@@ -1,45 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nm.c                                            :+:      :+:    :+:   */
+/*   display_otool.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 09:25:19 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/30 10:12:22 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-t_symtab		init_symtab(t_symtab symt)
+void			display_output_otool(long unsigned int addr, unsigned int size,
+	char *ptr, char *section)
 {
-	symt.data = 0;
-	symt.bss = 0;
-	symt.text = 0;
-	symt.ns = 1;
-	return (symt);
-}
+	unsigned int	i;
+	char			*str;
 
-int				print_error(char *file, char *str)
-{
-	ft_printf("ft_nm: %s: %s.\n", file, str);
-	return (0);
-}
-
-void			nm(char *ptr, char *name)
-{
-	unsigned int magic_number;
-
-	magic_number = *(int *)ptr;
-	if (magic_number == MH_MAGIC_64)
-		handle_64(ptr, name);
-	else if (magic_number == FAT_MAGIC || magic_number == FAT_CIGAM)
-		handle_fat(ptr);
-	else if (magic_number == MH_MAGIC)
-		handle_32(ptr, name);
-	else if (!ft_strncmp(ptr, ARMAG, SARMAG))
-		handle_lib(ptr, name);
-	else
-		return ;
+	i = 0;
+	ft_printf("%s\n", section);
+	while (i < size)
+	{
+		if (i == 0 || i % 16 == 0)
+		{
+			if (i != 0)
+				addr += 16;
+			ft_printf("%016llx\t", addr);
+		}
+		str = ft_itoa_base(ptr[i], 16, 2);
+		ft_printf("%s ", str);
+		free(str);
+		if ((i + 1) % 16 == 0 && i + 1 < size)
+			ft_printf("\n");
+		i++;
+	}
+	ft_printf("\n");
 }

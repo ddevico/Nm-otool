@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddevico <ddevico@student.42.fr>          +#+  +:+       +#+         #
+#    By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/11/28 10:56:39 by ddevico          #+#    #+#              #
-#    Updated: 2017/10/18 13:44:16 by ddevico          ###   ########.fr        #
+#    Created: 2015/11/28 10:56:39 by ddevico           #+#    #+#              #
+#    Updated: 2017/10/30 09:10:56 by ddevico          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,10 +47,6 @@ all: $(NAME)
 $(NAME): $(OBJLIB)
 	@ar rc	$(NAME) $(OBJLIB)
 	@ranlib	$(NAME)
-	@echo "	_,  _ __, __, ___"
-	@echo "	|   | |_) |_   | "
-	@echo "	| , | |_) |    | "
-	@echo "	~~~ ~ ~   ~    ~ "
 	@echo "\033[1;34mLibft\t\t\033[1;33mCompilation\t\033[0;32m-OK-\033[0m"
 
 $(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c

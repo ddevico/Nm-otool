@@ -6,17 +6,17 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/25 21:28:00 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/10/30 10:19:29 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-t_offlist			*order_off(t_offlist *lst)
+t_offlist				*order_off(t_offlist *lst)
 {
-	t_offlist	*cur;
-	uint32_t	tmp;
-	int			stop;
+	t_offlist			*cur;
+	uint32_t			tmp;
+	int					stop;
 
 	cur = lst;
 	stop = 1;
@@ -41,8 +41,8 @@ t_offlist			*order_off(t_offlist *lst)
 
 static struct nlist		*fill_array(struct nlist *tab, int nsyms)
 {
-	int				i;
-	struct nlist	*tab2;
+	int					i;
+	struct nlist		*tab2;
 
 	tab2 = (struct nlist*)malloc(sizeof(struct nlist) * nsyms);
 	i = -1;
@@ -51,13 +51,13 @@ static struct nlist		*fill_array(struct nlist *tab, int nsyms)
 	return (tab2);
 }
 
-struct nlist		*tri_bulle_alpha(char *stringtable, struct nlist *tab,
-					int nsyms)
+struct nlist			*tri_bulle_alpha(char *stringtable, struct nlist *tab,
+						int nsyms)
 {
-	int				i;
-	int				j;
-	struct nlist	*new_tab;
-	struct nlist	temp;
+	int					i;
+	int					j;
+	struct nlist		*new_tab;
+	struct nlist		temp;
 
 	i = 0;
 	new_tab = fill_array(tab, nsyms);
@@ -80,10 +80,10 @@ struct nlist		*tri_bulle_alpha(char *stringtable, struct nlist *tab,
 	return (new_tab);
 }
 
-static struct nlist_64		*fill_array_64(struct nlist_64 *tab, int nsyms)
+static struct nlist_64	*fill_array_64(struct nlist_64 *tab, int nsyms)
 {
-	int				i;
-	struct nlist_64	*tab2;
+	int					i;
+	struct nlist_64		*tab2;
 
 	tab2 = (struct nlist_64*)malloc(sizeof(struct nlist_64) * nsyms);
 	i = -1;
@@ -92,13 +92,13 @@ static struct nlist_64		*fill_array_64(struct nlist_64 *tab, int nsyms)
 	return (tab2);
 }
 
-struct nlist_64		*tri_bulle_64_alpha(char *stringtable, struct nlist_64 *tab,
-	int nsyms)
+struct nlist_64			*tri_bulle_64_alpha(char *stringtable,
+						struct nlist_64 *tab, int nsyms)
 {
-	int				i;
-	int				j;
-	struct nlist_64	*new_tab;
-	struct nlist_64	temp;
+	int					i;
+	int					j;
+	struct nlist_64		*new_tab;
+	struct nlist_64		temp;
 
 	i = 0;
 	new_tab = fill_array_64(tab, nsyms);
