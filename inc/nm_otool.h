@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:47:55 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 11:48:55 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/31 15:07:45 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int						g_text;
 int						g_bonus_nm[100];
 int						g_bonus_otool;
 int						g_icount;
+void					*g_buff_addr;
+int						g_buff_size;
 
 typedef struct			s_symtab
 {
@@ -75,12 +77,14 @@ char					*get_name(char *name);
 t_offlist				*add_off(t_offlist *lst, uint32_t off, uint32_t strx);
 void					handle_lib(char *ptr, char *name);
 int						search_lst(t_offlist *lst, uint32_t off);
-void					handle_fat(char *ptr);
+void					handle_fat(char *ptr, char *name);
 int						try_option(int number);
 void					choose_bonus(struct nlist elem, char *str,
 						t_symtab *symt, char *name);
 void					choose_bonus_64(struct nlist_64 elem, char *str,
 						t_symtab *symt, char *name);
+void					file_broken(void);
+int						verif(void *ask);
 
 /*
 ** OTOOL

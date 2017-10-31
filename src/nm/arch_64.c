@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 11:43:19 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/31 15:59:08 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ static void						print_output_64(struct symtab_command *sym,
 	lc = (void *)ptr + sizeof(*header);
 	array = (void *)ptr + sym->symoff;
 	stringtable = (void *)ptr + sym->stroff;
+	if (!verif((void *)array) || !verif((void *)lc) || !verif((void *)stringtable))
+	{
+		file_broken();
+		return ;
+	}
 	if (!try_option(2))
 		array = tri_bulle_64_alpha(stringtable, array, sym->nsyms);
 	sort_duplicate_strx_by_value_64(array, stringtable, sym->nsyms);

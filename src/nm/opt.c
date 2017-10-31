@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 13:21:09 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 10:26:16 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/31 16:14:16 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void			display_output_undef_64(struct nlist_64 elem, char *str,
 	char		c;
 
 	c = get_type(elem.n_type, elem.n_sect, elem.n_value, symt);
-	if (ft_strcmp("radr://5614542", str) == 0)
+	if ((ft_strcmp("radr://5614542", str) == 0) || (c == '-'))
 		return ;
 	if (try_option(3))
 	{
@@ -54,7 +54,7 @@ static void			display_output_undef(struct nlist elem, char *str,
 	char		c;
 
 	c = get_type(elem.n_type, elem.n_sect, elem.n_value, symt);
-	if (ft_strcmp("radr://5614542", str) == 0)
+	if ((ft_strcmp("radr://5614542", str) == 0) || (c == '-'))
 		return ;
 	if (try_option(3))
 	{

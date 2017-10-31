@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 14:52:29 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/31 14:58:54 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static int				loop_arg(char *av)
 	if ((ptr = mmap(0, buf.st_size, PROT_READ, MAP_PRIVATE, fd, 0))
 	== MAP_FAILED)
 		return (print_error(av, "Is a directory"));
+	g_buff_addr = ptr;
+	g_buff_size = buf.st_size;
 	nm(ptr, av);
 	if (munmap(ptr, buf.st_size) < 0)
 		return (print_error(av, "Error with munmap"));

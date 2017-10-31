@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 11:42:15 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/10/31 15:16:09 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,16 @@ int		search_lst(t_offlist *lst, uint32_t off)
 		cur = cur->next;
 	}
 	return (0);
+}
+
+void        file_broken(void)
+{
+    ft_putstr("File is broken...\n");
+}
+
+int            verif(void *ask)
+{
+    if (ask <= g_buff_addr + g_buff_size)
+        return (1);
+    return (0);
 }
