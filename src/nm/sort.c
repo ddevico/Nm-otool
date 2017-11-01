@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/30 10:19:29 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/01 15:50:46 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_offlist				*order_off(t_offlist *lst)
 
 	cur = lst;
 	stop = 1;
-	while (stop)
+	while (cur && stop)
 	{
 		stop = 0;
 		cur = lst;

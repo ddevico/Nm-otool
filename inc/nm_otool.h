@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:47:55 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/01 11:00:59 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/01 17:25:41 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void					choose_bonus_64(struct nlist_64 elem, char *str,
 void					file_broken(void);
 int						verif(void *ask);
 int						compare_strx(char *stringtable, struct nlist *array,
-							uint32_t increment);
-int						compare_strx_64(char *stringtable, struct nlist_64 *array,
-							uint32_t increment);
+						uint32_t increment);
+int						compare_strx_64(char *stringtable, struct nlist_64
+						*array, uint64_t increment);
 
 /*
 ** OTOOL
@@ -102,5 +102,7 @@ void					handle_64_otool(void *ptr);
 void					display_output_otool(long unsigned int addr,
 						unsigned int size,
 						char *ptr, char *section);
+void					display_output_otool_64(long unsigned int addr,
+						unsigned int size, char *ptr, char *section);
 
 #endif

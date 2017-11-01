@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/29 16:57:50 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/01 17:30:11 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void						print_output_64(struct segment_command_64 *seg,
 			if (ft_strcmp(sect->sectname, SECT_TEXT) == 0 &&
 			ft_strcmp(sect->segname, SEG_TEXT) == 0)
 			{
-				display_output_otool(sect->addr, sect->size, (char *)header
+				display_output_otool_64(sect->addr, sect->size, (char *)header
 				+ sect->offset, "Contents of (__TEXT,__text) section");
 			}
 		}

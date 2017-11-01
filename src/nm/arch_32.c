@@ -6,21 +6,20 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/01 10:59:22 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/01 17:36:24 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-static void		sort_duplicate_strx_by_value(struct nlist *array,
-	char *stringtable, uint32_t size)
+static void					sort_duplicate_strx_by_value(struct nlist *array,
+							char *stringtable, uint32_t size)
 {
-	uint32_t		tmp_value;
-	int				sorted;
-	uint32_t		increment;
+	struct nlist			tmp_value;
+	int						sorted;
+	uint32_t				increment;
 
 	sorted = 0;
-	tmp_value = 0;
 	while (!sorted)
 	{
 		sorted = 1;
@@ -31,9 +30,9 @@ static void		sort_duplicate_strx_by_value(struct nlist *array,
 			{
 				if (array[increment].n_value > array[increment + 1].n_value)
 				{
-					tmp_value = array[increment + 1].n_value;
-					array[increment + 1].n_value = array[increment].n_value;
-					array[increment].n_value = tmp_value;
+					tmp_value = array[increment + 1];
+					array[increment + 1] = array[increment];
+					array[increment] = tmp_value;
 					sorted = 0;
 				}
 			}
@@ -100,7 +99,8 @@ static void					print_output(struct symtab_command *sym,
 	lc = (void *)ptr + sizeof(*header);
 	array = (void *)ptr + sym->symoff;
 	stringtable = (void *)ptr + sym->stroff;
-	if (!verif((void *)array) || !verif((void *)lc) || !verif((void *)stringtable))
+	if (!verif((void *)array) || !verif((void *)lc)
+		|| !verif((void *)stringtable))
 	{
 		file_broken();
 		return ;

@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/31 14:39:03 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/01 17:37:25 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void						handle_fat(char *ptr, char *name)
 {
 	struct fat_header		*fat_header;
 	struct fat_arch			*arch;
-	struct mach_header64 	*header;
+	struct mach_header64	*header;
 	uint32_t				offset;
 	uint32_t				i;
 
@@ -35,7 +35,7 @@ void						handle_fat(char *ptr, char *name)
 		offset = swap_uint32(arch->offset);
 		header = (void*)ptr + offset;
 		if (swap_uint32(arch->cputype) == CPU_TYPE_X86_64)
-			break;
+			break ;
 		arch = (void *)arch + sizeof(*arch);
 		i++;
 	}
