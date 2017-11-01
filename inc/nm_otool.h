@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:47:55 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/31 15:07:45 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/01 11:00:59 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ void					choose_bonus_64(struct nlist_64 elem, char *str,
 						t_symtab *symt, char *name);
 void					file_broken(void);
 int						verif(void *ask);
+int						compare_strx(char *stringtable, struct nlist *array,
+							uint32_t increment);
+int						compare_strx_64(char *stringtable, struct nlist_64 *array,
+							uint32_t increment);
 
 /*
 ** OTOOL

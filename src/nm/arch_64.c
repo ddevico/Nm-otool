@@ -6,30 +6,28 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:13:31 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/31 15:59:08 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/01 10:59:57 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-static void						sort_duplicate_strx_by_value_64(struct
-								nlist_64 *array, char *stringtable,
-								uint32_t size)
+static void		sort_duplicate_strx_by_value_64(struct nlist_64 *array,
+	char *stringtable, uint32_t size)
 {
-	uint64_t					tmp_value;
-	int							sorted;
-	int							increment;
+	uint64_t		tmp_value;
+	int				sorted;
+	uint32_t		increment;
 
 	sorted = 0;
 	tmp_value = 0;
 	while (!sorted)
 	{
 		sorted = 1;
-		increment = -1;
-		while ((uint32_t)++increment < size - 1)
+		increment = 0;
+		while (increment < size - 1)
 		{
-			if (ft_strcmp(stringtable + array[increment].n_un.n_strx,
-				stringtable + array[increment + 1].n_un.n_strx) == 0)
+			if (compare_strx_64(stringtable, array, increment))
 			{
 				if (array[increment].n_value > array[increment + 1].n_value)
 				{
@@ -39,6 +37,7 @@ static void						sort_duplicate_strx_by_value_64(struct
 					sorted = 0;
 				}
 			}
+			++increment;
 		}
 	}
 }
