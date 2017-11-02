@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/01 17:28:14 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/02 12:35:04 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void			file_broken(void)
 
 int				verif(void *ask)
 {
-	if (ask <= g_buff_addr + g_buff_size)
+	if (ask <= (g_buff_addr + g_buff_size))
 		return (1);
 	return (0);
 }
