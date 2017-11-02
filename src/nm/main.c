@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/31 14:58:54 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/02 11:15:20 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ static int				loop_arg(char *av)
 	if ((ptr = mmap(0, buf.st_size, PROT_READ, MAP_PRIVATE, fd, 0))
 	== MAP_FAILED)
 		return (print_error(av, "Is a directory"));
+	if (ft_strstr(av, ".h") || ft_strstr(av, ".c"))
+		return (print_error(av, "The file was not recognized as a valid object \
+						file"));
 	g_buff_addr = ptr;
 	g_buff_size = buf.st_size;
 	nm(ptr, av);
@@ -101,10 +104,10 @@ int						main(int ac, char **av)
 				return (0);
 			i++;
 		}
-		if (ac - ft_count_opt(av) > 2 && ft_strcmp(av[1], "-A")
-			&& (av[i][ft_strlen(av[i]) - 1] != 'a'))
-			ft_printf("\n%s:\n", av[i]);
 		str = av[i];
+		if (ac - ft_count_opt(av) > 2 && ft_strcmp(av[1], "-A")
+			&& (av[i][ft_strlen(av[i]) - 1] != 'a') && is_valid_file(str))
+			ft_printf("\n%s:\n", av[i]);
 		loop_arg(str);
 		i++;
 	}

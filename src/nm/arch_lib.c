@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 10:19:40 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/31 14:46:42 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/02 11:43:04 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ static void			print_ar(t_offlist *lst, char *ptr, char *file)
 	{
 		arch = (void*)ptr + tmp->off;
 		name = get_name(arch->ar_name);
+		g_bonus_lib = name;
 		size_name = get_size(arch->ar_name);
-		ft_printf("\n%s(%s):\n", file, name);
+		if (!try_option(1))
+			ft_printf("\n%s(%s):\n", file, name);
 		nm((void*)arch + sizeof(*arch) + size_name, file);
+		g_bonus_lib = NULL;
 		tmp = tmp->next;
 	}
 }

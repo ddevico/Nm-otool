@@ -6,11 +6,17 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/29 16:57:10 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/02 12:22:49 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
+
+static void				option()
+{
+		ft_printf("Option:\n");
+		ft_printf("    -d    Precede each symbol by the name of the input file.\n");
+}
 
 static int			loop_arg(char *av)
 {
@@ -42,6 +48,11 @@ int					main(int ac, char **av)
 	i = 0;
 	if (ac > 1)
 	{
+		if (av[1][0] == '-' && ft_strcmp(av[1], "-d"))
+		{
+			option();
+			return (0);
+		}
 		if (ft_strcmp(av[1], "-d") == 0)
 		{
 			g_bonus_otool = 1;

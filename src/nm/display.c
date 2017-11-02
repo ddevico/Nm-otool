@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 13:21:09 by ddevico           #+#    #+#             */
-/*   Updated: 2017/10/31 16:14:05 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/02 12:04:20 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void			display_output(struct nlist elem, char *str, t_symtab *symt,
 	char		c;
 
 	c = get_type(elem.n_type, elem.n_sect, elem.n_value, symt);
-	if (try_option(1))
+	if (try_option(1) && !g_bonus_lib)
 		ft_printf("%s: ", name);
+	else if (try_option(1) && g_bonus_lib)
+		ft_printf("%s:%s: ", name, g_bonus_lib);
 	if ((ft_strcmp("radr://5614542", str) == 0) || (c == '-'))
 		return ;
 	if (elem.n_value == 0 && (c == 'U' || c == 'u'))
@@ -74,8 +76,10 @@ void			display_output_64(struct nlist_64 elem, char *str,
 	char		c;
 
 	c = get_type(elem.n_type, elem.n_sect, elem.n_value, symt);
-	if (try_option(1))
+	if (try_option(1) && !g_bonus_lib)
 		ft_printf("%s: ", name);
+	else if (try_option(1) && g_bonus_lib)
+		ft_printf("%s:%s: ", name, g_bonus_lib);
 	if ((ft_strcmp("radr://5614542", str) == 0) || (c == '-'))
 		return ;
 	if (elem.n_value == 0 && (c == 'U' || c == 'u'))

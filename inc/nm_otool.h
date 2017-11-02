@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:47:55 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/01 17:25:41 by ddevico          ###   ########.fr       */
+/*   Updated: 2017/11/02 11:33:03 by davydevico       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int						g_bonus_otool;
 int						g_icount;
 void					*g_buff_addr;
 int						g_buff_size;
+char					*g_bonus_lib;
 
 typedef struct			s_symtab
 {
@@ -59,6 +60,7 @@ int						ft_printf(const char *str, ...);
 t_symtab				init_symtab(void);
 int						print_error(char *file, char *str);
 void					nm(char *ptr, char *av);
+int						is_valid_file(char *av);
 char					get_type(uint32_t type, uint32_t n_sect, int value,
 						t_symtab *symt);
 void					display_output(struct nlist elem, char *str,
