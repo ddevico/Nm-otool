@@ -6,7 +6,7 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/02 11:15:20 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/07 09:00:18 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int				loop_arg(char *av)
 		return (print_error(av, "Is a directory"));
 	if (ft_strstr(av, ".h") || ft_strstr(av, ".c"))
 		return (print_error(av, "The file was not recognized as a valid object \
-						file"));
+		file"));
 	g_buff_addr = ptr;
 	g_buff_size = buf.st_size;
 	nm(ptr, av);

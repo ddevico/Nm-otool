@@ -6,17 +6,17 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/06 12:31:55 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/07 08:59:08 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-int					is_valid_file(char *av)
+int				is_valid_file(char *av)
 {
-	struct stat			buf;
-	int					fd;
-	char				*ptr;
+	struct stat	buf;
+	int			fd;
+	char		*ptr;
 
 	if ((fd = open(av, O_RDONLY)) < 0)
 		return (0);

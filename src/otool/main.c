@@ -6,16 +6,16 @@
 /*   By: ddevico <ddevico@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 16:44:03 by ddevico           #+#    #+#             */
-/*   Updated: 2017/11/06 12:24:53 by davydevico       ###   ########.fr       */
+/*   Updated: 2017/11/07 08:52:49 by ddevico          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/nm_otool.h"
 
-static void				option()
+static void			option(void)
 {
-		ft_printf("Option:\n");
-		ft_printf("    -d    Precede each symbol by the name of the input file.\n");
+	ft_printf("Option:\n");
+	ft_printf("    -d    Precede each symbol by the name of the input file.\n");
 }
 
 static int			loop_arg(char *av)
